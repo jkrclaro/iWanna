@@ -1,0 +1,6 @@
+framework module Pods_iWanna {
+  umbrella header "Pods-iWanna-umbrella.h"
+
+  export *
+  module * { export * }
+}
