@@ -15,7 +15,7 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
     @IBOutlet weak var booksTable: UITableView!
     @IBOutlet weak var booksSearchBar: UISearchBar!
     
-    var booksSearchResults = [String]()
+    var booksSearchResults = [Book]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,29 +30,37 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("bookCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.text = booksSearchResults[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as! BookCell
+        let book = booksSearchResults[indexPath.row] as Book
+        cell.bookTitle.text = book.title
+        cell.bookAuthor.text = book.author
         return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
     }
     
     // Do something when search bar search button is clicked
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         booksSearchBar.resignFirstResponder()
         
-        // https://www.googleapis.com/books/v1/volumes?q=the%20hobbit&key=AIzaSyCLO9SKNd0GDTtPKpavS0yoFPoBS4FH3HE
-
         let validKeyword = booksSearchBar.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
         let validURL = "https://www.googleapis.com/books/v1/volumes?q=" + validKeyword! + "&key=AIzaSyCLO9SKNd0GDTtPKpavS0yoFPoBS4FH3HE"
         
         Alamofire.request(.GET, validURL).responseJSON { (responseData) -> Void in
             let data = JSON(responseData.result.value!)
             
-            if let title = data["items"][0]["volumeInfo"]["title"].string {
-                print(title)
+            self.booksSearchResults.removeAll(keepCapacity: false)
+            
+            for (_, subData) in data["items"] {
+                if let title = subData["volumeInfo"]["title"].string {
+                    let isEqual = (title.lowercaseString == self.booksSearchBar.text?.lowercaseString)
+                    if isEqual {
+                        self.booksSearchResults.append(Book(title: title, author: "Nikola Tesla"))
+                    }
+                }
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.booksTable.reloadData()
+                self.booksSearchBar.resignFirstResponder()
             }
         }
     }
@@ -70,5 +78,16 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
         booksSearchResults.removeAll(keepCapacity: false)
         booksTable.reloadData()
     }
+}
+
+class Book: NSObject {
     
+    var title: String
+    var author: String
+    
+    init(title: String, author: String) {
+        self.title = title
+        self.author = author
+        super.init()
+    }
 }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		75E66B58263D501AEA619F5A /* Pods_iWanna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C01B5B6B545409E5ED9DC /* Pods_iWanna.framework */; };
 		E29D478E1C9C5CF1000AA90E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D478D1C9C5CF1000AA90E /* AppDelegate.swift */; };
-		E29D47901C9C5CF1000AA90E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D478F1C9C5CF1000AA90E /* ViewController.swift */; };
 		E29D47931C9C5CF1000AA90E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29D47911C9C5CF1000AA90E /* Main.storyboard */; };
 		E29D47961C9C5CF1000AA90E /* iWanna.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E29D47941C9C5CF1000AA90E /* iWanna.xcdatamodeld */; };
 		E29D47981C9C5CF1000AA90E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29D47971C9C5CF1000AA90E /* Assets.xcassets */; };
@@ -19,6 +18,9 @@
 		E2B964481C9C720D00D54C0C /* SongsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B964471C9C720D00D54C0C /* SongsController.swift */; };
 		E2B9644A1C9C721900D54C0C /* BooksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B964491C9C721900D54C0C /* BooksController.swift */; };
 		E2B9644C1C9C722100D54C0C /* MoviesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B9644B1C9C722100D54C0C /* MoviesController.swift */; };
+		E2CFD0141C9D794F00998B8C /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFD0131C9D794F00998B8C /* BookCell.swift */; };
+		E2CFD0161C9D937300998B8C /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFD0151C9D937300998B8C /* MovieCell.swift */; };
+		E2CFD0181C9D937D00998B8C /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFD0171C9D937D00998B8C /* SongCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +46,6 @@
 		72D858CF74C14EC2F127F071 /* Pods-iWanna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWanna.release.xcconfig"; path = "Pods/Target Support Files/Pods-iWanna/Pods-iWanna.release.xcconfig"; sourceTree = "<group>"; };
 		E29D478A1C9C5CF0000AA90E /* iWanna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWanna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29D478D1C9C5CF1000AA90E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E29D478F1C9C5CF1000AA90E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E29D47921C9C5CF1000AA90E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E29D47951C9C5CF1000AA90E /* iWanna.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iWanna.xcdatamodel; sourceTree = "<group>"; };
 		E29D47971C9C5CF1000AA90E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +60,9 @@
 		E2B964471C9C720D00D54C0C /* SongsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsController.swift; sourceTree = "<group>"; };
 		E2B964491C9C721900D54C0C /* BooksController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksController.swift; sourceTree = "<group>"; };
 		E2B9644B1C9C722100D54C0C /* MoviesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesController.swift; sourceTree = "<group>"; };
+		E2CFD0131C9D794F00998B8C /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
+		E2CFD0151C9D937300998B8C /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		E2CFD0171C9D937D00998B8C /* SongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,11 +134,13 @@
 			isa = PBXGroup;
 			children = (
 				E29D478D1C9C5CF1000AA90E /* AppDelegate.swift */,
-				E29D478F1C9C5CF1000AA90E /* ViewController.swift */,
 				E29D47911C9C5CF1000AA90E /* Main.storyboard */,
-				E2B964471C9C720D00D54C0C /* SongsController.swift */,
 				E2B964491C9C721900D54C0C /* BooksController.swift */,
+				E2CFD0131C9D794F00998B8C /* BookCell.swift */,
+				E2B964471C9C720D00D54C0C /* SongsController.swift */,
+				E2CFD0171C9D937D00998B8C /* SongCell.swift */,
 				E2B9644B1C9C722100D54C0C /* MoviesController.swift */,
+				E2CFD0151C9D937300998B8C /* MovieCell.swift */,
 				E29D47971C9C5CF1000AA90E /* Assets.xcassets */,
 				E29D47991C9C5CF1000AA90E /* LaunchScreen.storyboard */,
 				E29D479C1C9C5CF1000AA90E /* Info.plist */,
@@ -346,7 +352,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E29D47901C9C5CF1000AA90E /* ViewController.swift in Sources */,
+				E2CFD0181C9D937D00998B8C /* SongCell.swift in Sources */,
+				E2CFD0161C9D937300998B8C /* MovieCell.swift in Sources */,
+				E2CFD0141C9D794F00998B8C /* BookCell.swift in Sources */,
 				E2B9644A1C9C721900D54C0C /* BooksController.swift in Sources */,
 				E2B9644C1C9C722100D54C0C /* MoviesController.swift in Sources */,
 				E29D478E1C9C5CF1000AA90E /* AppDelegate.swift in Sources */,
