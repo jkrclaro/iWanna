@@ -22,7 +22,11 @@
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <items>
                                     <navigationItem title="Movies" id="HdX-1v-TvT">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="lkc-ga-JAj"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="lkc-ga-JAj">
+                                            <connections>
+                                                <action selector="cancelButtonTapped:" destination="9w7-id-joS" id="9Tp-Mw-GPy"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -30,7 +34,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="9w7-id-joS" id="YXU-W4-BKZ"/>
+                                    <outlet property="delegate" destination="9w7-id-joS" id="Fon-vg-nRB"/>
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e3c-RY-hkf">
@@ -51,8 +55,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Obf-dJ-vXS">
-                                                    <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Director" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Obf-dJ-vXS">
+                                                    <rect key="frame" x="15" y="25.5" width="42.5" height="13.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -63,6 +67,7 @@
                                         <connections>
                                             <outlet property="movieDirector" destination="Obf-dJ-vXS" id="oGM-E5-slM"/>
                                             <outlet property="movieTitle" destination="FIe-IB-Kvr" id="KF8-Is-zZW"/>
+                                            <segue destination="upR-cQ-K3F" kind="presentation" id="Xhr-aE-ND8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -86,7 +91,11 @@
                             <constraint firstItem="aGF-0l-18S" firstAttribute="leading" secondItem="yCa-G7-SSQ" secondAttribute="leading" id="zZs-RD-frY"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Movies" id="9rR-J1-KyZ"/>
+                    <tabBarItem key="tabBarItem" title="Movies" image="MovieIcon" id="9rR-J1-KyZ"/>
+                    <connections>
+                        <outlet property="moviesSearchBar" destination="yCa-G7-SSQ" id="3y5-DU-cf9"/>
+                        <outlet property="moviesTable" destination="e3c-RY-hkf" id="grq-je-XYY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yaa-TN-mwo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -109,7 +118,11 @@
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <items>
                                     <navigationItem title="Songs" id="zRl-2I-CDk">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="LBG-c1-IyB"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="LBG-c1-IyB">
+                                            <connections>
+                                                <action selector="cancelButtonTapped:" destination="uJv-UA-2ma" id="zfJ-f9-bgA"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -131,8 +144,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S8R-qm-j6A">
-                                                    <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S8R-qm-j6A">
+                                                    <rect key="frame" x="15" y="25.5" width="29" height="13.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -143,6 +156,7 @@
                                         <connections>
                                             <outlet property="songArtist" destination="S8R-qm-j6A" id="ZV5-tc-CK1"/>
                                             <outlet property="songTitle" destination="Bwk-Qo-JJk" id="bG4-xc-Ybk"/>
+                                            <segue destination="x0v-7H-XDm" kind="presentation" id="Kag-vd-BAi"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -155,7 +169,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="uJv-UA-2ma" id="Pfo-pW-Waw"/>
+                                    <outlet property="delegate" destination="uJv-UA-2ma" id="lwL-tf-a8f"/>
                                 </connections>
                             </searchBar>
                         </subviews>
@@ -173,7 +187,11 @@
                             <constraint firstItem="EKa-B6-ejK" firstAttribute="top" secondItem="3aJ-fw-de4" secondAttribute="bottom" id="pvb-NP-YvU"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Songs" id="nFy-8Z-tZO"/>
+                    <tabBarItem key="tabBarItem" title="Songs" image="SongIcon" id="nFy-8Z-tZO"/>
+                    <connections>
+                        <outlet property="songsSearchBar" destination="3aJ-fw-de4" id="e5a-Zg-guZ"/>
+                        <outlet property="songsTable" destination="EKa-B6-ejK" id="cSi-4s-xYa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Mv-7F-J7A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -198,7 +216,7 @@
                                     <navigationItem title="Books" id="tVZ-dz-jVN">
                                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="0wS-QP-2QR">
                                             <connections>
-                                                <action selector="refreshButtonTapped:" destination="V6S-1K-m1m" id="x0X-tF-Nzi"/>
+                                                <action selector="cancelButtonTapped:" destination="V6S-1K-m1m" id="gIw-pl-HFo"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -229,7 +247,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a4k-nR-pqO">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a4k-nR-pqO">
                                                     <rect key="frame" x="15" y="30.5" width="35.5" height="13.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -242,6 +260,7 @@
                                         <connections>
                                             <outlet property="bookAuthor" destination="a4k-nR-pqO" id="emJ-cY-x66"/>
                                             <outlet property="bookTitle" destination="dC5-0O-REw" id="QSg-Ry-dKi"/>
+                                            <segue destination="spb-ci-PFZ" kind="presentation" id="u9W-ml-dSs"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -266,7 +285,7 @@
                             <constraint firstItem="rAy-bj-40i" firstAttribute="top" secondItem="1MS-aO-HqS" secondAttribute="bottom" id="vvH-gK-iC8"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Books" id="NJl-Q8-mEf"/>
+                    <tabBarItem key="tabBarItem" title="Books" image="BookIcon" id="NJl-Q8-mEf"/>
                     <connections>
                         <outlet property="booksSearchBar" destination="rAy-bj-40i" id="dcf-Fz-GK8"/>
                         <outlet property="booksTable" destination="cu6-r3-D1W" id="Cac-pk-DHu"/>
@@ -275,6 +294,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UnN-BS-VRE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="501" y="-146"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="MgU-3a-i9J">
+            <objects>
+                <viewController id="spb-ci-PFZ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oV8-7E-Rkv"/>
+                        <viewControllerLayoutGuide type="bottom" id="TC9-RV-xCv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2IS-5g-6Dc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="564-sP-ABh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1215" y="-146"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Tqz-cZ-Jhj">
+            <objects>
+                <viewController id="upR-cQ-K3F" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vM8-7h-i7f"/>
+                        <viewControllerLayoutGuide type="bottom" id="We6-yh-Dae"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hEi-Pq-lal">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BFT-r7-A43" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1215" y="571"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="aRK-Du-kcJ">
+            <objects>
+                <viewController id="x0v-7H-XDm" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hKe-aa-rL3"/>
+                        <viewControllerLayoutGuide type="bottom" id="80N-5N-FrO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="J49-Qc-8DZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mmn-84-gU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1215" y="1335"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Jq8-gk-2lI">
@@ -296,4 +369,9 @@
             <point key="canvasLocation" x="-293" y="499"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="BookIcon" width="16" height="16"/>
+        <image name="MovieIcon" width="16" height="16"/>
+        <image name="SongIcon" width="16" height="16"/>
+    </resources>
 </document>

@@ -71,8 +71,8 @@ class SongsController: UIViewController, UITableViewDataSource, UITableViewDeleg
         songsSearchBar.text = ""
     }
     
-    // Do something when refresh button is tapped
-    @IBAction func refreshButtonTapped(sender: AnyObject) {
+    
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
         songsSearchBar.resignFirstResponder()
         songsSearchBar.text = ""
         songsSearchResults.removeAll(keepCapacity: false)

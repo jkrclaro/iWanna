@@ -71,13 +71,13 @@ class MoviesController: UIViewController, UITableViewDataSource, UITableViewDele
         moviesSearchBar.text = ""
     }
     
-    // Do something when refresh button is tapped
-    @IBAction func refreshButtonTapped(sender: AnyObject) {
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
         moviesSearchBar.resignFirstResponder()
         moviesSearchBar.text = ""
         moviesSearchResults.removeAll(keepCapacity: false)
         moviesTable.reloadData()
     }
+    
 }
 
 class Movie: NSObject {

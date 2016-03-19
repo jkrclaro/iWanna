@@ -49,16 +49,25 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
             
             self.booksSearchResults.removeAll(keepCapacity: false)
             
-            for (_, subData) in data["items"] {
-                if let title = subData["volumeInfo"]["title"].string {
-                    let isEqual = (title.lowercaseString == self.booksSearchBar.text?.lowercaseString)
-                    if isEqual {
-                        self.booksSearchResults.append(Book(title: title, author: "Nikola Tesla"))
+            for (_, bookDetails) in data["items"] {
+                if let title = bookDetails["volumeInfo"]["title"].string {
+//                    let isEqual = (title.lowercaseString == self.booksSearchBar.text?.lowercaseString)
+                    if title.lowercaseString.containsString(self.booksSearchBar.text!.lowercaseString) {
+                        var authors = ""
+                        for (key, bookAuthors) in bookDetails["volumeInfo"]["authors"] {
+                            if(key == "0") { // Don't include the & at first
+                                authors += bookAuthors.string!
+                            } else {
+                                authors += " & " + bookAuthors.string!
+                            }
+                        }
+                        self.booksSearchResults.append(Book(title: title, author: authors))
                     }
                 }
             }
             
             dispatch_async(dispatch_get_main_queue()) {
+                self.booksSearchResults.sortInPlace({$0.title < $1.title}) // Sort the results alphabetically
                 self.booksTable.reloadData()
                 self.booksSearchBar.resignFirstResponder()
             }
@@ -71,13 +80,13 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
         booksSearchBar.text = ""
     }
     
-    // Do something when refresh button is tapped
-    @IBAction func refreshButtonTapped(sender: AnyObject) {
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
         booksSearchBar.resignFirstResponder()
         booksSearchBar.text = ""
         booksSearchResults.removeAll(keepCapacity: false)
         booksTable.reloadData()
     }
+    
 }
 
 class Book: NSObject {
