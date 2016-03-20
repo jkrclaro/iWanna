@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Movies-->
@@ -229,43 +230,62 @@
                                     <outlet property="delegate" destination="V6S-1K-m1m" id="lsr-DJ-TD5"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cu6-r3-D1W">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cu6-r3-D1W">
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BookCell" textLabel="dC5-0O-REw" detailTextLabel="a4k-nR-pqO" imageView="CEd-kA-feV" rowHeight="55" style="IBUITableViewCellStyleSubtitle" id="D9E-Rt-dZi" customClass="BookCell" customModule="iWanna" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="55"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BookCell" rowHeight="54" id="D9E-Rt-dZi" customClass="BookCell" customModule="iWanna" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D9E-Rt-dZi" id="1LF-R4-QL5">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="54.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="D9E-Rt-dZi" id="1LF-R4-QL5">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dC5-0O-REw">
-                                                    <rect key="frame" x="65" y="11" width="31.5" height="19.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a4k-nR-pqO">
-                                                    <rect key="frame" x="65" y="30.5" width="35.5" height="13.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="content-2" id="CEd-kA-feV">
-                                                    <rect key="frame" x="15" y="0.0" width="35" height="54.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ExampleBook" translatesAutoresizingMaskIntoConstraints="NO" id="OFd-Pk-Dcw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="54"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="Boc-gc-HeU"/>
+                                                    </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fg-Km-P9e">
+                                                    <rect key="frame" x="108" y="23" width="459" height="23"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Author">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Um-od-y6F">
+                                                    <rect key="frame" x="108" y="8" width="426" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="OFd-Pk-Dcw" firstAttribute="centerY" secondItem="1LF-R4-QL5" secondAttribute="centerY" id="3hN-5k-fLW"/>
+                                                <constraint firstItem="5fg-Km-P9e" firstAttribute="top" secondItem="1LF-R4-QL5" secondAttribute="topMargin" constant="15" id="5bZ-mr-Rbi"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="5fg-Km-P9e" secondAttribute="bottom" constant="-0.5" id="9uD-3S-hF5"/>
+                                                <constraint firstItem="8Um-od-y6F" firstAttribute="leading" secondItem="OFd-Pk-Dcw" secondAttribute="trailing" constant="8" symbolic="YES" id="AEP-fY-4zq"/>
+                                                <constraint firstItem="8Um-od-y6F" firstAttribute="leading" secondItem="5fg-Km-P9e" secondAttribute="leading" id="Evf-fG-iGH"/>
+                                                <constraint firstItem="OFd-Pk-Dcw" firstAttribute="top" secondItem="1LF-R4-QL5" secondAttribute="top" id="YEU-xR-Eij"/>
+                                                <constraint firstItem="OFd-Pk-Dcw" firstAttribute="leading" secondItem="1LF-R4-QL5" secondAttribute="leading" id="dgZ-gs-S9y"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="8Um-od-y6F" secondAttribute="bottom" constant="16.5" id="gRO-CZ-hqN"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="8Um-od-y6F" secondAttribute="trailing" constant="25" id="je6-d6-Sar"/>
+                                                <constraint firstAttribute="trailing" secondItem="5fg-Km-P9e" secondAttribute="trailing" id="wuG-Rj-YWF"/>
+                                                <constraint firstItem="8Um-od-y6F" firstAttribute="top" secondItem="1LF-R4-QL5" secondAttribute="topMargin" id="xA0-h5-jFk"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <outlet property="bookAuthor" destination="a4k-nR-pqO" id="emJ-cY-x66"/>
-                                            <outlet property="bookImage" destination="CEd-kA-feV" id="YTk-QT-AaY"/>
-                                            <outlet property="bookTitle" destination="dC5-0O-REw" id="QSg-Ry-dKi"/>
-                                            <segue destination="spb-ci-PFZ" kind="presentation" id="u9W-ml-dSs"/>
+                                            <outlet property="bookAuthor" destination="5fg-Km-P9e" id="RdE-tu-ke4"/>
+                                            <outlet property="bookImage" destination="OFd-Pk-Dcw" id="kSA-GO-a7T"/>
+                                            <outlet property="bookTitle" destination="8Um-od-y6F" id="vtd-xO-GZj"/>
+                                            <segue destination="spb-ci-PFZ" kind="show" identifier="" id="u9W-ml-dSs"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -278,16 +298,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cu6-r3-D1W" firstAttribute="leading" secondItem="rAy-bj-40i" secondAttribute="leading" id="2Vx-bw-rNA"/>
-                            <constraint firstAttribute="trailing" secondItem="1MS-aO-HqS" secondAttribute="trailing" id="9ar-aY-ZMj"/>
-                            <constraint firstItem="rAy-bj-40i" firstAttribute="trailing" secondItem="cu6-r3-D1W" secondAttribute="trailing" id="9jv-2y-yO8"/>
-                            <constraint firstItem="1MS-aO-HqS" firstAttribute="top" secondItem="TtM-4t-ssm" secondAttribute="bottom" id="LNF-fk-IDt"/>
-                            <constraint firstItem="cu6-r3-D1W" firstAttribute="bottom" secondItem="Dlc-K2-HBk" secondAttribute="top" id="c24-c7-y55"/>
-                            <constraint firstItem="rAy-bj-40i" firstAttribute="top" secondItem="1MS-aO-HqS" secondAttribute="bottom" id="d7h-py-vrc"/>
-                            <constraint firstItem="rAy-bj-40i" firstAttribute="trailing" secondItem="1MS-aO-HqS" secondAttribute="trailing" id="hmc-f1-mX0"/>
-                            <constraint firstItem="1MS-aO-HqS" firstAttribute="leading" secondItem="rAy-bj-40i" secondAttribute="leading" id="iox-AT-w6k"/>
-                            <constraint firstItem="cu6-r3-D1W" firstAttribute="top" secondItem="rAy-bj-40i" secondAttribute="bottom" id="qb8-ZJ-RHs"/>
-                            <constraint firstItem="rAy-bj-40i" firstAttribute="leading" secondItem="uIM-AG-tAx" secondAttribute="leading" id="zN7-DW-aPw"/>
+                            <constraint firstItem="rAy-bj-40i" firstAttribute="leading" secondItem="cu6-r3-D1W" secondAttribute="leading" id="4jH-B2-wF9"/>
+                            <constraint firstItem="rAy-bj-40i" firstAttribute="trailing" secondItem="1MS-aO-HqS" secondAttribute="trailing" id="5uj-HT-X5V"/>
+                            <constraint firstItem="1MS-aO-HqS" firstAttribute="top" secondItem="TtM-4t-ssm" secondAttribute="bottom" id="Dgt-yR-BHd"/>
+                            <constraint firstItem="rAy-bj-40i" firstAttribute="top" secondItem="1MS-aO-HqS" secondAttribute="bottom" id="K9l-Wr-ebh"/>
+                            <constraint firstItem="cu6-r3-D1W" firstAttribute="bottom" secondItem="Dlc-K2-HBk" secondAttribute="top" id="a4w-Sq-l6M"/>
+                            <constraint firstItem="rAy-bj-40i" firstAttribute="trailing" secondItem="cu6-r3-D1W" secondAttribute="trailing" id="d0i-1U-dl2"/>
+                            <constraint firstItem="1MS-aO-HqS" firstAttribute="leading" secondItem="rAy-bj-40i" secondAttribute="leading" id="hqd-Yg-vad"/>
+                            <constraint firstItem="cu6-r3-D1W" firstAttribute="top" secondItem="rAy-bj-40i" secondAttribute="bottom" id="r5j-2V-Nfw"/>
+                            <constraint firstItem="rAy-bj-40i" firstAttribute="leading" secondItem="uIM-AG-tAx" secondAttribute="leading" id="rS5-Iw-r5a"/>
+                            <constraint firstAttribute="trailing" secondItem="1MS-aO-HqS" secondAttribute="trailing" id="z2A-wf-CNl"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Books" image="BookIcon" id="NJl-Q8-mEf"/>
@@ -320,8 +340,16 @@
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <items>
                                     <navigationItem title="Books" id="DHf-cK-rSW">
-                                        <barButtonItem key="leftBarButtonItem" image="BackIcon" id="nPb-37-ucc"/>
-                                        <barButtonItem key="rightBarButtonItem" image="AddIcon" id="f60-Tf-dZG"/>
+                                        <barButtonItem key="leftBarButtonItem" image="BackIcon" id="nPb-37-ucc">
+                                            <connections>
+                                                <segue destination="x5H-Qp-QfV" kind="unwind" unwindAction="cancelToBooksController:" id="mwu-iA-uOq"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="AddIcon" id="f60-Tf-dZG">
+                                            <connections>
+                                                <segue destination="x5H-Qp-QfV" kind="unwind" unwindAction="saveBookDetails:" id="2WE-EL-V1y"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -393,6 +421,7 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="564-sP-ABh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="x5H-Qp-QfV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1215" y="-146"/>
         </scene>
@@ -456,8 +485,8 @@
         <image name="AddIcon" width="16" height="16"/>
         <image name="BackIcon" width="16" height="16"/>
         <image name="BookIcon" width="16" height="16"/>
+        <image name="ExampleBook" width="128" height="199"/>
         <image name="MovieIcon" width="16" height="16"/>
         <image name="SongIcon" width="16" height="16"/>
-        <image name="content-2" width="128" height="199"/>
     </resources>
 </document>

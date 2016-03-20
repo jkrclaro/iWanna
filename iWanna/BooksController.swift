@@ -40,15 +40,13 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     // Do something when search bar search button is clicked
-    func searchBarSearchButtonClicked(searchBar: UISearchBar, completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         booksSearchBar.resignFirstResponder()
         let validKeyword = booksSearchBar.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
         let validBookURL = "https://www.googleapis.com/books/v1/volumes?q=" + validKeyword! + "&key=AIzaSyCLO9SKNd0GDTtPKpavS0yoFPoBS4FH3HE"
-        print("Clicked search")
         
         Alamofire.request(.GET, validBookURL).responseJSON { (responseData) -> Void in
             let data = JSON(responseData.result.value!)
-            
             self.booksSearchResults.removeAll(keepCapacity: false)
             
             for (_, bookDetails) in data["items"] {
@@ -62,23 +60,28 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
                                 authors += " & " + bookAuthors.string!
                             }
                         }
-                        var imageURL = bookDetails["volumeInfo"]["imageLinks"]["smallThumbnail"].string!
-                        imageURL = imageURL.stringByReplacingOccurrencesOfString("http:", withString: "https:")
-                        Alamofire.request(.GET, imageURL).responseImage { response in
+                        var imageURL = bookDetails["volumeInfo"]["imageLinks"]["smallThumbnail"].string
+                        
+                        if imageURL != nil {
+                            imageURL = imageURL!.stringByReplacingOccurrencesOfString("http:", withString: "https:")
+                        } else {
+                            imageURL = "http://books.google.ie/books/content?id=&printsec=frontcover&img=1&zoom=5&source=gbs_api"
+                        }
+                        
+                        Alamofire.request(.GET, imageURL!).responseImage { response in
                             if let image = response.result.value {
-                                print("Adding image")
-                                self.booksSearchResults.append(Book(title: title, author: authors, image: image))
+                                self.booksSearchResults.append(Book(title: title, author: authors, image: image, date: "2012"))
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    self.booksSearchResults.sortInPlace({$0.title < $1.title}) // Sort the results alphabetically
+                                    self.booksTable.reloadData()
+                                    self.booksSearchBar.resignFirstResponder()
+                                })
                             }
                         }
                     }
                 }
             }
         }
-        dispatch_async(dispatch_get_main_queue(), {
-            self.booksSearchResults.sortInPlace({$0.title < $1.title}) // Sort the results alphabetically
-            self.booksTable.reloadData()
-            self.booksSearchBar.resignFirstResponder()
-        })
     }
     
     // Do something when search bar cancel button is clicked
@@ -97,6 +100,14 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
     @IBAction func cancelToBooksController(segue: UIStoryboardSegue) {
         
     }
+    
+    @IBAction func saveBookDetails(segue: UIStoryboardSegue) {
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("WTF")
+    }
 }
 
 class Book: NSObject {
@@ -104,11 +115,13 @@ class Book: NSObject {
     var title: String
     var author: String
     var image: UIImage
+    var date: String
     
-    init(title: String, author: String, image: UIImage) {
+    init(title: String, author: String, image: UIImage, date: String) {
         self.title = title
         self.author = author
         self.image = image
+        self.date = date
         super.init()
     }
 }
