@@ -85,9 +85,11 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-iWanna/Alamofire.framework"
+  install_framework "Pods-iWanna/AlamofireImage.framework"
   install_framework "Pods-iWanna/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-iWanna/Alamofire.framework"
+  install_framework "Pods-iWanna/AlamofireImage.framework"
   install_framework "Pods-iWanna/SwiftyJSON.framework"
 fi

@@ -15,6 +15,7 @@
 		E29D479B1C9C5CF1000AA90E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29D47991C9C5CF1000AA90E /* LaunchScreen.storyboard */; };
 		E29D47A61C9C5CF1000AA90E /* iWannaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D47A51C9C5CF1000AA90E /* iWannaTests.swift */; };
 		E29D47B11C9C5CF1000AA90E /* iWannaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D47B01C9C5CF1000AA90E /* iWannaUITests.swift */; };
+		E2A54C021C9DE87100EBFED0 /* BookDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A54C011C9DE87100EBFED0 /* BookDetailsController.swift */; };
 		E2B964481C9C720D00D54C0C /* SongsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B964471C9C720D00D54C0C /* SongsController.swift */; };
 		E2B9644A1C9C721900D54C0C /* BooksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B964491C9C721900D54C0C /* BooksController.swift */; };
 		E2B9644C1C9C722100D54C0C /* MoviesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B9644B1C9C722100D54C0C /* MoviesController.swift */; };
@@ -57,6 +58,7 @@
 		E29D47AC1C9C5CF1000AA90E /* iWannaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iWannaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29D47B01C9C5CF1000AA90E /* iWannaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iWannaUITests.swift; sourceTree = "<group>"; };
 		E29D47B21C9C5CF1000AA90E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2A54C011C9DE87100EBFED0 /* BookDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailsController.swift; sourceTree = "<group>"; };
 		E2B964471C9C720D00D54C0C /* SongsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsController.swift; sourceTree = "<group>"; };
 		E2B964491C9C721900D54C0C /* BooksController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksController.swift; sourceTree = "<group>"; };
 		E2B9644B1C9C722100D54C0C /* MoviesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				E29D47911C9C5CF1000AA90E /* Main.storyboard */,
 				E2B964491C9C721900D54C0C /* BooksController.swift */,
 				E2CFD0131C9D794F00998B8C /* BookCell.swift */,
+				E2A54C011C9DE87100EBFED0 /* BookDetailsController.swift */,
 				E2B964471C9C720D00D54C0C /* SongsController.swift */,
 				E2CFD0171C9D937D00998B8C /* SongCell.swift */,
 				E2B9644B1C9C722100D54C0C /* MoviesController.swift */,
@@ -359,6 +362,7 @@
 				E2B9644C1C9C722100D54C0C /* MoviesController.swift in Sources */,
 				E29D478E1C9C5CF1000AA90E /* AppDelegate.swift in Sources */,
 				E2B964481C9C720D00D54C0C /* SongsController.swift in Sources */,
+				E2A54C021C9DE87100EBFED0 /* BookDetailsController.swift in Sources */,
 				E29D47961C9C5CF1000AA90E /* iWanna.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
