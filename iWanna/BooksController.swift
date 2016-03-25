@@ -30,15 +30,6 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
         return booksSearchResults.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as! BookCell
-        let book = self.booksSearchResults[indexPath.row] as Book
-        cell.bookTitle.text = book.title
-        cell.bookAuthor.text = book.author
-        cell.bookImage.image = book.image
-        return cell
-    }
-    
     // Do something when search bar search button is clicked
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         booksSearchBar.resignFirstResponder()
@@ -49,6 +40,12 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
             let data = JSON(responseData.result.value!)
             self.booksSearchResults.removeAll(keepCapacity: false)
             
+            dispatch_async(dispatch_get_main_queue(), {
+                self.booksSearchResults.sortInPlace({$0.title < $1.title}) // Sort the results alphabetically
+                self.booksTable.reloadData()
+                self.booksSearchBar.resignFirstResponder()
+            })
+
             for (_, bookDetails) in data["items"] {
                 if let title = bookDetails["volumeInfo"]["title"].string {
                     if title.lowercaseString.containsString(self.booksSearchBar.text!.lowercaseString) {
@@ -70,7 +67,7 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
                         
                         Alamofire.request(.GET, imageURL!).responseImage { response in
                             if let image = response.result.value {
-                                self.booksSearchResults.append(Book(title: title, author: authors, image: image, date: "2012"))
+                                self.booksSearchResults.append(Book(title: title, author: authors, image: image, summary: "Nulla varius pharetra nisl vitae placerat. Aenean luctus molestie libero id hendrerit. Integer vel tristique elit. Suspendisse id ullamcorper libero, eget ultricies velit. Ut vel dapibus ipsum. Vivamus et nulla dui. Mauris sem massa, tempus in velit vitae, pellentesque tempus nunc. Fusce ac suscipit risus, eu dictum ipsum. Fusce sagittis est congue est accumsan ultrices. Mauris sollicitudin vestibulum magna a vestibulum. Donec cursus eu est in venenatis. Donec porta diam ut sem consectetur, et eleifend ligula congue. Vestibulum eros dui, viverra nec felis vitae, vulputate sagittis risus."))
                                 dispatch_async(dispatch_get_main_queue(), {
                                     self.booksSearchResults.sortInPlace({$0.title < $1.title}) // Sort the results alphabetically
                                     self.booksTable.reloadData()
@@ -88,6 +85,8 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         booksSearchBar.resignFirstResponder()
         booksSearchBar.text = ""
+        booksSearchResults.removeAll(keepCapacity: false)
+        booksTable.reloadData()
     }
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
@@ -105,8 +104,26 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
         
     }
     
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as! BookCell
+        let book = self.booksSearchResults[indexPath.row] as Book
+        cell.bookTitle.text = book.title
+        cell.bookAuthor.text = book.author
+        cell.bookImage.image = book.image
+        return cell
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("WTF")
+        if segue.identifier == "bookDetailSelected" {
+            if let destination = segue.destinationViewController as? BookDetailsController {
+                let path = booksTable.indexPathForSelectedRow
+                let book = self.booksSearchResults[path!.row] as Book
+                destination.viaSegueBookImage = book.image
+                destination.viaSegueBookTitle = book.title
+                destination.viaSegueBookAuthor = book.author
+                destination.viaSegueBookSummary = book.summary
+            }
+        }
     }
 }
 
@@ -115,13 +132,13 @@ class Book: NSObject {
     var title: String
     var author: String
     var image: UIImage
-    var date: String
+    var summary: String
     
-    init(title: String, author: String, image: UIImage, date: String) {
+    init(title: String, author: String, image: UIImage, summary: String) {
         self.title = title
         self.author = author
         self.image = image
-        self.date = date
+        self.summary = summary
         super.init()
     }
 }
