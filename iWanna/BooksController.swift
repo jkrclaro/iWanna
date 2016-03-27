@@ -49,25 +49,32 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
             for (_, bookDetails) in data["items"] {
                 if let title = bookDetails["volumeInfo"]["title"].string {
                     if title.lowercaseString.containsString(self.booksSearchBar.text!.lowercaseString) {
-                        var authors = ""
-                        for (key, bookAuthors) in bookDetails["volumeInfo"]["authors"] {
-                            if(key == "0") { // Don't include the & at first
-                                authors += bookAuthors.string!
-                            } else {
-                                authors += " & " + bookAuthors.string!
-                            }
-                        }
-                        var imageURL = bookDetails["volumeInfo"]["imageLinks"]["smallThumbnail"].string
+                        let author = bookDetails["volumeInfo"]["authors"].first!.1.string!
                         
+                        var summary = bookDetails["volumeInfo"]["description"].string
+                        if summary != nil {
+                            summary = bookDetails["volumeInfo"]["description"].string!
+                        } else {
+                            summary = "N/A"
+                        }
+                        
+                        var imageURL = bookDetails["volumeInfo"]["imageLinks"]["smallThumbnail"].string
                         if imageURL != nil {
                             imageURL = imageURL!.stringByReplacingOccurrencesOfString("http:", withString: "https:")
                         } else {
-                            imageURL = "http://books.google.ie/books/content?id=&printsec=frontcover&img=1&zoom=5&source=gbs_api"
+                            imageURL = "https://books.google.ie/books/content?id=&printsec=frontcover&img=1&zoom=5&source=gbs_api"
+                        }
+                        
+                        var publishedDate = bookDetails["volumeInfo"]["publishedDate"].string
+                        if publishedDate != nil {
+                            publishedDate = bookDetails["volumeInfo"]["publishedDate"].string
+                        } else {
+                            publishedDate = "N/A"
                         }
                         
                         Alamofire.request(.GET, imageURL!).responseImage { response in
                             if let image = response.result.value {
-                                self.booksSearchResults.append(Book(title: title, author: authors, image: image, summary: "Nulla varius pharetra nisl vitae placerat. Aenean luctus molestie libero id hendrerit. Integer vel tristique elit. Suspendisse id ullamcorper libero, eget ultricies velit. Ut vel dapibus ipsum. Vivamus et nulla dui. Mauris sem massa, tempus in velit vitae, pellentesque tempus nunc. Fusce ac suscipit risus, eu dictum ipsum. Fusce sagittis est congue est accumsan ultrices. Mauris sollicitudin vestibulum magna a vestibulum. Donec cursus eu est in venenatis. Donec porta diam ut sem consectetur, et eleifend ligula congue. Vestibulum eros dui, viverra nec felis vitae, vulputate sagittis risus. Nulla varius pharetra nisl vitae placerat. Aenean luctus molestie libero id hendrerit. Integer vel tristique elit. Suspendisse id ullamcorper libero, eget ultricies velit. Ut vel dapibus ipsum. Vivamus et nulla dui. Mauris sem massa, tempus in velit vitae, pellentesque tempus nunc. Fusce ac suscipit risus, eu dictum ipsum. Fusce sagittis est congue est accumsan ultrices. Mauris sollicitudin vestibulum magna a vestibulum. Donec cursus eu est in venenatis. Donec porta diam ut sem consectetur, et eleifend ligula congue. Vestibulum eros dui, viverra nec felis vitae, vulputate sagittis risus. Nulla varius pharetra nisl vitae placerat. Aenean luctus molestie libero id hendrerit. Integer vel tristique elit. Suspendisse id ullamcorper libero, eget ultricies velit. Ut vel dapibus ipsum. Vivamus et nulla dui. Mauris sem massa, tempus in velit vitae, pellentesque tempus nunc. Fusce ac suscipit risus, eu dictum ipsum. Fusce sagittis est congue est accumsan ultrices. Mauris sollicitudin vestibulum magna a vestibulum. Donec cursus eu est in venenatis. Donec porta diam ut sem consectetur, et eleifend ligula congue. Vestibulum eros dui, viverra nec felis vitae, vulputate sagittis risus."))
+                                self.booksSearchResults.append(Book(title: title, author: author, image: image, summary: summary!, publishedDate: publishedDate!))
                                 dispatch_async(dispatch_get_main_queue(), {
                                     self.booksSearchResults.sortInPlace({$0.title < $1.title}) // Sort the results alphabetically
                                     self.booksTable.reloadData()
@@ -110,6 +117,7 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
         cell.bookTitle.text = book.title
         cell.bookAuthor.text = book.author
         cell.bookImage.image = book.image
+        cell.bookPublishedDate.text = book.publishedDate
         return cell
     }
     
@@ -133,12 +141,14 @@ class Book: NSObject {
     var author: String
     var image: UIImage
     var summary: String
+    var publishedDate: String
     
-    init(title: String, author: String, image: UIImage, summary: String) {
+    init(title: String, author: String, image: UIImage, summary: String, publishedDate: String) {
         self.title = title
         self.author = author
         self.image = image
         self.summary = summary
+        self.publishedDate = publishedDate
         super.init()
     }
 }
