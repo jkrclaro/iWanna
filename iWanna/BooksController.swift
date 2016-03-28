@@ -72,9 +72,16 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
                             publishedDate = "N/A"
                         }
                         
+                        var rating = bookDetails["volumeInfo"]["averageRating"].double
+                        if rating != nil {
+                            rating = bookDetails["volumeInfo"]["averageRating"].double
+                        } else {
+                            rating = 0.0
+                        }
+                        
                         Alamofire.request(.GET, imageURL!).responseImage { response in
                             if let image = response.result.value {
-                                self.booksSearchResults.append(Book(title: title, author: author, image: image, summary: summary!, publishedDate: publishedDate!))
+                                self.booksSearchResults.append(Book(title: title, author: author, image: image, summary: summary!, publishedDate: publishedDate!, rating: rating!))
                                 dispatch_async(dispatch_get_main_queue(), {
                                     self.booksSearchResults.sortInPlace({$0.title < $1.title}) // Sort the results alphabetically
                                     self.booksTable.reloadData()
@@ -118,6 +125,7 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
         cell.bookAuthor.text = book.author
         cell.bookImage.image = book.image
         cell.bookPublishedDate.text = book.publishedDate
+        cell.bookRating.image = self.imageForRating(book.rating)
         return cell
     }
     
@@ -133,6 +141,36 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
             }
         }
     }
+    
+    func imageForRating(rating:Double) -> UIImage? {
+        switch rating {
+        case 0.0:
+            return UIImage(named: "0stars")
+        case 0.5:
+            return UIImage(named: "0-5stars")
+        case 1.0:
+            return UIImage(named: "1stars")
+        case 1.5:
+            return UIImage(named: "1-5stars")
+        case 2.0:
+            return UIImage(named: "2stars")
+        case 2.5:
+            return UIImage(named: "2-5stars")
+        case 3.0:
+            return UIImage(named: "3stars")
+        case 3.5:
+            return UIImage(named: "3-5stars")
+        case 4.0:
+            return UIImage(named: "4stars")
+        case 4.5:
+            return UIImage(named: "4-5stars")
+        case 5.0:
+            return UIImage(named: "5stars")
+        default:
+            return nil
+        }
+        
+    }
 }
 
 class Book: NSObject {
@@ -142,13 +180,15 @@ class Book: NSObject {
     var image: UIImage
     var summary: String
     var publishedDate: String
+    var rating: Double
     
-    init(title: String, author: String, image: UIImage, summary: String, publishedDate: String) {
+    init(title: String, author: String, image: UIImage, summary: String, publishedDate: String, rating: Double) {
         self.title = title
         self.author = author
         self.image = image
         self.summary = summary
         self.publishedDate = publishedDate
+        self.rating = rating
         super.init()
     }
 }
