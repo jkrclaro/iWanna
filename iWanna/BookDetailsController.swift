@@ -16,17 +16,14 @@ class BookDetailsController: UIViewController {
     @IBOutlet weak var bookDetailsSummary: UILabel!
     @IBOutlet weak var bookDetailsImage: UIImageView!
     
-    var viaSegueBookTitle = ""
-    var viaSegueBookAuthor = ""
-    var viaSegueBookSummary = ""
-    var viaSegueBookImage = UIImage(named: "ExampleBook")
+    var selectedBook = Book(title: "", author: "", image: UIImage(named: "ExampleBook")!, summary: "", publishedDate: "", rating: 0.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bookDetailsTitle.text = viaSegueBookTitle
-        bookDetailsAuthor.text = viaSegueBookAuthor
-        bookDetailsSummary.text = viaSegueBookSummary
-        bookDetailsImage.image = viaSegueBookImage
+        bookDetailsTitle.text = selectedBook.title
+        bookDetailsAuthor.text = selectedBook.author
+        bookDetailsSummary.text = selectedBook.summary
+        bookDetailsImage.image = selectedBook.image
     }
     
     override func didReceiveMemoryWarning() {

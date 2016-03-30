@@ -212,7 +212,6 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1MS-aO-HqS">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <items>
                                     <navigationItem title="Books" id="tVZ-dz-jVN">
                                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="0wS-QP-2QR">
@@ -238,10 +237,10 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="D9E-Rt-dZi" id="1LF-R4-QL5">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ExampleBook" translatesAutoresizingMaskIntoConstraints="NO" id="OFd-Pk-Dcw">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoBookCover" translatesAutoresizingMaskIntoConstraints="NO" id="OFd-Pk-Dcw">
                                                     <rect key="frame" x="8" y="5" width="64" height="87"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="64" id="xfw-CS-5hG"/>
@@ -286,7 +285,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5stars" translatesAutoresizingMaskIntoConstraints="NO" id="yVU-5K-SXE">
+                                                <imageView userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5stars" translatesAutoresizingMaskIntoConstraints="NO" id="yVU-5K-SXE">
                                                     <rect key="frame" x="80" y="71" width="479" height="21"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Published Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0T-KT-LA3">
@@ -375,15 +374,17 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BN7-Iq-K2x">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="6uO-Og-zRU">
+                                    <navigationItem title="Books" id="6uO-Og-zRU">
                                         <barButtonItem key="leftBarButtonItem" image="BackIcon" id="pLq-j7-tmf">
                                             <connections>
-                                                <segue destination="1eY-YY-tyD" kind="unwind" unwindAction="cancelToBooksController:" id="8z9-7l-hXK"/>
+                                                <action selector="cancelToBooksController:" destination="TYc-A1-fig" id="Sd8-np-neD"/>
+                                                <segue destination="1eY-YY-tyD" kind="unwind" unwindAction="cancelToBooksController:" id="pW8-CD-v9Q"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" image="AddIcon" id="hEA-OA-VoH">
                                             <connections>
-                                                <segue destination="1eY-YY-tyD" kind="unwind" unwindAction="saveBookDetails:" id="0Fv-tv-upF"/>
+                                                <action selector="saveBookDetails:" destination="TYc-A1-fig" id="92y-O0-LqV"/>
+                                                <segue destination="1eY-YY-tyD" kind="unwind" unwindAction="saveBookDetails:" id="lZg-3V-Xw5"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -392,15 +393,14 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="RvM-dq-Vz4">
                                 <rect key="frame" x="0.0" y="72" width="600" height="479"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="FBY-Gq-7rI">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game of Thrones" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="FBY-Gq-7rI">
                                         <rect key="frame" x="28" y="220" width="544" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="1Wc-PT-fmU"/>
                                             <constraint firstAttribute="height" constant="21" id="IhI-Lm-RiM"/>
                                             <constraint firstAttribute="height" constant="21" id="eh7-h7-Pg3"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -410,23 +410,27 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Author" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="UeM-IE-J5p">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="George R.R Martin" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="UeM-IE-J5p">
                                         <rect key="frame" x="28" y="249" width="544" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="SeQ-Qd-mhY"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                        <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zso-0X-Qac">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gLy-qa-N27">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="144"/>
+                                        <color key="backgroundColor" white="0.89750925006482429" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoBookCover" translatesAutoresizingMaskIntoConstraints="NO" id="Zso-0X-Qac">
                                         <rect key="frame" x="236" y="20" width="128" height="192"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="bzN-p4-0rR"/>
                                             <constraint firstAttribute="height" constant="192" id="ezk-Nq-gtH"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Summary" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Yy-dt-fLV">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Summary of book here" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Yy-dt-fLV">
                                         <rect key="frame" x="28" y="278" width="544" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="IIr-nQ-UxJ"/>
@@ -550,8 +554,8 @@
         <image name="AddIcon" width="16" height="16"/>
         <image name="BackIcon" width="16" height="16"/>
         <image name="BookIcon" width="16" height="16"/>
-        <image name="ExampleBook" width="128" height="199"/>
         <image name="MovieIcon" width="16" height="16"/>
+        <image name="NoBookCover" width="57" height="80"/>
         <image name="SongIcon" width="16" height="16"/>
     </resources>
 </document>

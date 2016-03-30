@@ -10,13 +10,16 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
+import CoreData
 
 class BooksController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var booksTable: UITableView!
     @IBOutlet weak var booksSearchBar: UISearchBar!
     
+    var selectedBook = Book(title: "", author: "", image: UIImage(named: "ExampleBook")!, summary: "", publishedDate: "", rating: 0.0)
     var booksSearchResults = [Book]()
+    var myBooks = [NSManagedObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +30,20 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return booksSearchResults.count
+        if booksSearchBar.text == "" {
+            return myBooks.count
+        } else {
+            return booksSearchResults.count
+        }
     }
     
     // Do something when search bar search button is clicked
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         booksSearchBar.resignFirstResponder()
+        self.updateSearchBar()
+    }
+    
+    func updateSearchBar() {
         let validKeyword = booksSearchBar.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
         let validBookURL = "https://www.googleapis.com/books/v1/volumes?q=" + validKeyword! + "&key=AIzaSyCLO9SKNd0GDTtPKpavS0yoFPoBS4FH3HE"
         
@@ -45,15 +56,20 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
                 self.booksTable.reloadData()
                 self.booksSearchBar.resignFirstResponder()
             })
-
+            
             for (_, bookDetails) in data["items"] {
                 if let title = bookDetails["volumeInfo"]["title"].string {
                     if title.lowercaseString.containsString(self.booksSearchBar.text!.lowercaseString) {
-                        let author = bookDetails["volumeInfo"]["authors"].first!.1.string!
+                        var author = bookDetails["volumeInfo"]["authors"].first?.1.string // EWRE
+                        if author != nil {
+                            author = bookDetails["volumeInfo"]["authors"].first!.1.string
+                        } else {
+                            author = "N/A"
+                        }
                         
                         var summary = bookDetails["volumeInfo"]["description"].string
                         if summary != nil {
-                            summary = bookDetails["volumeInfo"]["description"].string!
+                            summary = bookDetails["volumeInfo"]["description"].string
                         } else {
                             summary = "N/A"
                         }
@@ -81,7 +97,7 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
                         
                         Alamofire.request(.GET, imageURL!).responseImage { response in
                             if let image = response.result.value {
-                                self.booksSearchResults.append(Book(title: title, author: author, image: image, summary: summary!, publishedDate: publishedDate!, rating: rating!))
+                                self.booksSearchResults.append(Book(title: title, author: author!, image: image, summary: summary!, publishedDate: publishedDate!, rating: rating!))
                                 dispatch_async(dispatch_get_main_queue(), {
                                     self.booksSearchResults.sortInPlace({$0.title < $1.title}) // Sort the results alphabetically
                                     self.booksTable.reloadData()
@@ -110,22 +126,43 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
         booksTable.reloadData()
     }
     
-    @IBAction func cancelToBooksController(segue: UIStoryboardSegue) {
-        
-    }
-    
-    @IBAction func saveBookDetails(segue: UIStoryboardSegue) {
-        
+    override func viewWillAppear(animated: Bool) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "MyBooks")
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            myBooks = results as! [NSManagedObject]
+        }
+        catch {
+            print("Error")
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as! BookCell
-        let book = self.booksSearchResults[indexPath.row] as Book
-        cell.bookTitle.text = book.title
-        cell.bookAuthor.text = book.author
-        cell.bookImage.image = book.image
-        cell.bookPublishedDate.text = book.publishedDate
-        cell.bookRating.image = self.imageForRating(book.rating)
+
+        if booksSearchBar.text == "" {
+            let book = myBooks[indexPath.row]
+            cell.bookTitle.text = book.valueForKey("title") as? String
+            cell.bookAuthor.text = book.valueForKey("author") as? String
+            cell.bookRating.image = self.imageForRating(book.valueForKey("rating") as! Double)
+            cell.bookPublishedDate.text = book.valueForKey("publishedDate") as? String
+            
+            let paths: NSArray = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+            let documentsDir: NSString = paths.objectAtIndex(0) as! NSString
+            let path: NSString = documentsDir.stringByAppendingString(book.valueForKey("coverImageFullURL") as! String)
+            let bookCoverImage = UIImage(contentsOfFile: path as String)
+            cell.bookImage.image = bookCoverImage
+            
+        } else {
+            let book = self.booksSearchResults[indexPath.row] as Book // Pressing cancel while searching gives error
+            cell.bookTitle.text = book.title
+            cell.bookAuthor.text = book.author
+            cell.bookImage.image = book.image
+            cell.bookPublishedDate.text = book.publishedDate
+            cell.bookRating.image = self.imageForRating(book.rating)
+        }
         return cell
     }
     
@@ -133,12 +170,59 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
         if segue.identifier == "bookDetailSelected" {
             if let destination = segue.destinationViewController as? BookDetailsController {
                 let path = booksTable.indexPathForSelectedRow
-                let book = self.booksSearchResults[path!.row] as Book
-                destination.viaSegueBookImage = book.image
-                destination.viaSegueBookTitle = book.title
-                destination.viaSegueBookAuthor = book.author
-                destination.viaSegueBookSummary = book.summary
+                if booksSearchBar.text == "" {
+                    let book = myBooks[path!.row]
+                    let paths: NSArray = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+                    let documentsDir: NSString = paths.objectAtIndex(0) as! NSString
+                    let path: NSString = documentsDir.stringByAppendingString(book.valueForKey("coverImageFullURL") as! String)
+                    let bookCoverImage = UIImage(contentsOfFile: path as String)
+                    
+                    let selectedMyBook = Book(title: book.valueForKey("title") as! String, author: book.valueForKey("author") as! String, image: bookCoverImage!, summary: book.valueForKey("summary") as! String, publishedDate: book.valueForKey("publishedDate") as! String, rating: book.valueForKey("rating") as! Double)
+                    destination.selectedBook = selectedMyBook
+                    selectedBook = selectedMyBook
+                } else {
+                    let book = self.booksSearchResults[path!.row] as Book
+                    destination.selectedBook = book
+                    selectedBook = book
+                }
             }
+        }
+    }
+    
+    @IBAction func cancelToBooksController(segue: UIStoryboardSegue) {
+    }
+    
+    @IBAction func saveBookDetails(segue: UIStoryboardSegue) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let entity = NSEntityDescription.entityForName("MyBooks", inManagedObjectContext: managedContext)
+        let item = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        let paths: NSArray = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDir: NSString = paths.objectAtIndex(0) as! NSString
+        let dateFormat = NSDateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd-HH-mm-ss"
+        let now: NSDate = NSDate(timeIntervalSinceNow: 0)
+        let theDate: NSString = dateFormat.stringFromDate(now)
+        let coverImageFullURL = NSString(format: "/%@.png", theDate) 
+        let pathFull: NSString = documentsDir.stringByAppendingString(coverImageFullURL as String)
+        let pngFullData: NSData = UIImagePNGRepresentation(selectedBook.image)!
+        pngFullData.writeToFile(pathFull as String, atomically: true)
+        print("SAVING: ", coverImageFullURL)
+        
+        item.setValue(selectedBook.title, forKey: "title")
+        item.setValue(selectedBook.publishedDate, forKey: "publishedDate")
+        item.setValue(selectedBook.rating, forKey: "rating")
+        item.setValue(selectedBook.summary, forKey: "summary")
+        item.setValue(selectedBook.author, forKey: "author")
+        item.setValue(coverImageFullURL, forKey: "coverImageFullURL")
+        do {
+            try managedContext.save()
+            myBooks.append(item)
+            self.booksTable.reloadData()
+        }
+        catch {
+            print("Error")
         }
     }
     
@@ -170,25 +254,5 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
             return nil
         }
         
-    }
-}
-
-class Book: NSObject {
-    
-    var title: String
-    var author: String
-    var image: UIImage
-    var summary: String
-    var publishedDate: String
-    var rating: Double
-    
-    init(title: String, author: String, image: UIImage, summary: String, publishedDate: String, rating: Double) {
-        self.title = title
-        self.author = author
-        self.image = image
-        self.summary = summary
-        self.publishedDate = publishedDate
-        self.rating = rating
-        super.init()
     }
 }

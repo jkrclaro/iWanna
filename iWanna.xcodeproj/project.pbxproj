@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		75E66B58263D501AEA619F5A /* Pods_iWanna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684C01B5B6B545409E5ED9DC /* Pods_iWanna.framework */; };
+		E230C2921CAA100B00C112C3 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230C2911CAA100B00C112C3 /* Book.swift */; };
 		E29A8D4E1CA1CE54001B1B20 /* BookDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29A8D4D1CA1CE54001B1B20 /* BookDetailsController.swift */; };
 		E29A8D501CA41716001B1B20 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29A8D4F1CA41716001B1B20 /* UILabelExtension.swift */; };
 		E29D478E1C9C5CF1000AA90E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D478D1C9C5CF1000AA90E /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 		577F9624FA1149A00716BB78 /* Pods-iWanna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWanna.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iWanna/Pods-iWanna.debug.xcconfig"; sourceTree = "<group>"; };
 		684C01B5B6B545409E5ED9DC /* Pods_iWanna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWanna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		72D858CF74C14EC2F127F071 /* Pods-iWanna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWanna.release.xcconfig"; path = "Pods/Target Support Files/Pods-iWanna/Pods-iWanna.release.xcconfig"; sourceTree = "<group>"; };
+		E230C2911CAA100B00C112C3 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		E29A8D4D1CA1CE54001B1B20 /* BookDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailsController.swift; sourceTree = "<group>"; };
 		E29A8D4F1CA41716001B1B20 /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		E29D478A1C9C5CF0000AA90E /* iWanna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWanna.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +141,7 @@
 			children = (
 				E29D478D1C9C5CF1000AA90E /* AppDelegate.swift */,
 				E29D47911C9C5CF1000AA90E /* Main.storyboard */,
+				E230C2911CAA100B00C112C3 /* Book.swift */,
 				E2B964491C9C721900D54C0C /* BooksController.swift */,
 				E2CFD0131C9D794F00998B8C /* BookCell.swift */,
 				E29A8D4D1CA1CE54001B1B20 /* BookDetailsController.swift */,
@@ -361,6 +364,7 @@
 				E2CFD0181C9D937D00998B8C /* SongCell.swift in Sources */,
 				E2CFD0161C9D937300998B8C /* MovieCell.swift in Sources */,
 				E29A8D501CA41716001B1B20 /* UILabelExtension.swift in Sources */,
+				E230C2921CAA100B00C112C3 /* Book.swift in Sources */,
 				E2CFD0141C9D794F00998B8C /* BookCell.swift in Sources */,
 				E2B9644A1C9C721900D54C0C /* BooksController.swift in Sources */,
 				E2B9644C1C9C722100D54C0C /* MoviesController.swift in Sources */,
