@@ -171,13 +171,14 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
             if let destination = segue.destinationViewController as? BookDetailsController {
                 let path = booksTable.indexPathForSelectedRow
                 if booksSearchBar.text == "" {
-                    let book = myBooks[path!.row]
+                    let myBook = myBooks[path!.row]
                     let paths: NSArray = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
                     let documentsDir: NSString = paths.objectAtIndex(0) as! NSString
-                    let path: NSString = documentsDir.stringByAppendingString(book.valueForKey("coverImageFullURL") as! String)
-                    let bookCoverImage = UIImage(contentsOfFile: path as String)
+                    let path: NSString = documentsDir.stringByAppendingString(myBook.valueForKey("coverImageFullURL") as! String)
+                    let myBookCoverImage = UIImage(contentsOfFile: path as String)
                     
-                    let selectedMyBook = Book(title: book.valueForKey("title") as! String, author: book.valueForKey("author") as! String, image: bookCoverImage!, summary: book.valueForKey("summary") as! String, publishedDate: book.valueForKey("publishedDate") as! String, rating: book.valueForKey("rating") as! Double)
+                    let selectedMyBook = Book(title: myBook.valueForKey("title") as! String, author: myBook.valueForKey("author") as! String, image: myBookCoverImage!, summary: myBook.valueForKey("summary") as! String, publishedDate: myBook.valueForKey("publishedDate") as! String, rating: myBook.valueForKey("rating") as! Double)
+                    
                     destination.selectedBook = selectedMyBook
                     selectedBook = selectedMyBook
                 } else {
@@ -186,6 +187,24 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
                     selectedBook = book
                 }
             }
+        }
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if booksSearchBar.text == "" {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if(editingStyle == UITableViewCellEditingStyle.Delete) {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            managedContext.deleteObject(myBooks[indexPath.row])
+            myBooks.removeAtIndex(indexPath.row)
+            self.booksTable.reloadData()
         }
     }
     
@@ -208,7 +227,6 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
         let pathFull: NSString = documentsDir.stringByAppendingString(coverImageFullURL as String)
         let pngFullData: NSData = UIImagePNGRepresentation(selectedBook.image)!
         pngFullData.writeToFile(pathFull as String, atomically: true)
-        print("SAVING: ", coverImageFullURL)
         
         item.setValue(selectedBook.title, forKey: "title")
         item.setValue(selectedBook.publishedDate, forKey: "publishedDate")
@@ -253,6 +271,5 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
         default:
             return nil
         }
-        
     }
 }
