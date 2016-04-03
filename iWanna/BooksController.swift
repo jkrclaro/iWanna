@@ -17,7 +17,7 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
     @IBOutlet weak var booksTable: UITableView!
     @IBOutlet weak var booksSearchBar: UISearchBar!
     
-    var selectedBook = Book(title: "", author: "", image: UIImage(named: "ExampleBook")!, summary: "", publishedDate: "", rating: 0.0)
+    var selectedBook = Book(title: "", author: "", image: UIImage(named: "NoBookCover")!, summary: "", publishedDate: "", rating: 0.0)
     var booksSearchResults = [Book]()
     var myBooks = [NSManagedObject]()
     
@@ -51,16 +51,12 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
             let data = JSON(responseData.result.value!)
             self.booksSearchResults.removeAll(keepCapacity: false)
             
-            dispatch_async(dispatch_get_main_queue(), {
-                self.booksSearchResults.sortInPlace({$0.title < $1.title}) // Sort the results alphabetically
-                self.booksTable.reloadData()
-                self.booksSearchBar.resignFirstResponder()
-            })
+            self.refreshTable()
             
             for (_, bookDetails) in data["items"] {
                 if let title = bookDetails["volumeInfo"]["title"].string {
                     if title.lowercaseString.containsString(self.booksSearchBar.text!.lowercaseString) {
-                        var author = bookDetails["volumeInfo"]["authors"].first?.1.string // EWRE
+                        var author = bookDetails["volumeInfo"]["authors"].first?.1.string
                         if author != nil {
                             author = bookDetails["volumeInfo"]["authors"].first!.1.string
                         } else {
@@ -98,17 +94,21 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
                         Alamofire.request(.GET, imageURL!).responseImage { response in
                             if let image = response.result.value {
                                 self.booksSearchResults.append(Book(title: title, author: author!, image: image, summary: summary!, publishedDate: publishedDate!, rating: rating!))
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    self.booksSearchResults.sortInPlace({$0.title < $1.title}) // Sort the results alphabetically
-                                    self.booksTable.reloadData()
-                                    self.booksSearchBar.resignFirstResponder()
-                                })
+                                self.refreshTable()
                             }
                         }
                     }
                 }
             }
         }
+    }
+    
+    func refreshTable() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.booksSearchResults.sortInPlace({$0.title < $1.title}) // Sort the results alphabetically
+            self.booksTable.reloadData()
+            self.booksSearchBar.resignFirstResponder()
+        })
     }
     
     // Do something when search bar cancel button is clicked
@@ -204,6 +204,11 @@ class BooksController: UIViewController, UITableViewDataSource, UITableViewDeleg
             let managedContext = appDelegate.managedObjectContext
             managedContext.deleteObject(myBooks[indexPath.row])
             myBooks.removeAtIndex(indexPath.row)
+            do {
+                try managedContext.save()
+            } catch {
+                fatalError("Failed to save deletion of book: \(error)")
+            }
             self.booksTable.reloadData()
         }
     }
