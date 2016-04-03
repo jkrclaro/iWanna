@@ -74,7 +74,7 @@ class SongsController: UIViewController, UITableViewDataSource, UITableViewDeleg
                         
                         var popularity = details["popularity"].rawString()
                         if popularity != nil {
-                            popularity = "Rating: " + popularity! + "/100"
+                            popularity = "Popularity: " + popularity! + "/100"
                         } else {
                             popularity = "N/A"
                         }

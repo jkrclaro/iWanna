@@ -11,7 +11,7 @@
 		E230C2921CAA100B00C112C3 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230C2911CAA100B00C112C3 /* Book.swift */; };
 		E23A8CBE1CAFF5E600CF46FC /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A8CBD1CAFF5E600CF46FC /* Song.swift */; };
 		E23A8CC01CAFF78400CF46FC /* SongDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A8CBF1CAFF78400CF46FC /* SongDetailsController.swift */; };
-		E23A8CC21CB07FB400CF46FC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A8CC11CB07FB400CF46FC /* Default-568h@2x.png */; };
+		E23A8CC61CB1976800CF46FC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E23A8CC51CB1976800CF46FC /* Launch Screen.storyboard */; };
 		E266A9561CAE72AA0021A5BA /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E266A9551CAE72AA0021A5BA /* Movie.swift */; };
 		E266A9591CAE743D0021A5BA /* MovieDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E266A9581CAE743D0021A5BA /* MovieDetailsController.swift */; };
 		E29A8D4E1CA1CE54001B1B20 /* BookDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29A8D4D1CA1CE54001B1B20 /* BookDetailsController.swift */; };
@@ -19,7 +19,6 @@
 		E29D47931C9C5CF1000AA90E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29D47911C9C5CF1000AA90E /* Main.storyboard */; };
 		E29D47961C9C5CF1000AA90E /* iWanna.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E29D47941C9C5CF1000AA90E /* iWanna.xcdatamodeld */; };
 		E29D47981C9C5CF1000AA90E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29D47971C9C5CF1000AA90E /* Assets.xcassets */; };
-		E29D479B1C9C5CF1000AA90E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29D47991C9C5CF1000AA90E /* LaunchScreen.storyboard */; };
 		E29D47A61C9C5CF1000AA90E /* iWannaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D47A51C9C5CF1000AA90E /* iWannaTests.swift */; };
 		E29D47B11C9C5CF1000AA90E /* iWannaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D47B01C9C5CF1000AA90E /* iWannaUITests.swift */; };
 		E2B964481C9C720D00D54C0C /* SongsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B964471C9C720D00D54C0C /* SongsController.swift */; };
@@ -54,7 +53,7 @@
 		E230C2911CAA100B00C112C3 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		E23A8CBD1CAFF5E600CF46FC /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		E23A8CBF1CAFF78400CF46FC /* SongDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongDetailsController.swift; sourceTree = "<group>"; };
-		E23A8CC11CB07FB400CF46FC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E23A8CC51CB1976800CF46FC /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		E266A9551CAE72AA0021A5BA /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		E266A9581CAE743D0021A5BA /* MovieDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsController.swift; sourceTree = "<group>"; };
 		E29A8D4D1CA1CE54001B1B20 /* BookDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailsController.swift; sourceTree = "<group>"; };
@@ -63,7 +62,6 @@
 		E29D47921C9C5CF1000AA90E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E29D47951C9C5CF1000AA90E /* iWanna.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iWanna.xcdatamodel; sourceTree = "<group>"; };
 		E29D47971C9C5CF1000AA90E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = iWanna/Assets.xcassets; sourceTree = "<group>"; };
-		E29D479A1C9C5CF1000AA90E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E29D479C1C9C5CF1000AA90E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = iWanna/Info.plist; sourceTree = "<group>"; };
 		E29D47A11C9C5CF1000AA90E /* iWannaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iWannaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29D47A51C9C5CF1000AA90E /* iWannaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iWannaTests.swift; sourceTree = "<group>"; };
@@ -158,12 +156,11 @@
 		E29D47811C9C5CF0000AA90E = {
 			isa = PBXGroup;
 			children = (
-				E23A8CC11CB07FB400CF46FC /* Default-568h@2x.png */,
 				E29D478C1C9C5CF0000AA90E /* iWanna */,
 				E29D478D1C9C5CF1000AA90E /* AppDelegate.swift */,
 				E29D47911C9C5CF1000AA90E /* Main.storyboard */,
+				E23A8CC51CB1976800CF46FC /* Launch Screen.storyboard */,
 				E29D47971C9C5CF1000AA90E /* Assets.xcassets */,
-				E29D47991C9C5CF1000AA90E /* LaunchScreen.storyboard */,
 				E29D479C1C9C5CF1000AA90E /* Info.plist */,
 				E29D47941C9C5CF1000AA90E /* iWanna.xcdatamodeld */,
 				E29D47A41C9C5CF1000AA90E /* iWannaTests */,
@@ -322,8 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E29D479B1C9C5CF1000AA90E /* LaunchScreen.storyboard in Resources */,
-				E23A8CC21CB07FB400CF46FC /* Default-568h@2x.png in Resources */,
+				E23A8CC61CB1976800CF46FC /* Launch Screen.storyboard in Resources */,
 				E29D47981C9C5CF1000AA90E /* Assets.xcassets in Resources */,
 				E29D47931C9C5CF1000AA90E /* Main.storyboard in Resources */,
 			);
@@ -453,15 +449,6 @@
 				E29D47921C9C5CF1000AA90E /* Base */,
 			);
 			name = Main.storyboard;
-			path = iWanna;
-			sourceTree = "<group>";
-		};
-		E29D47991C9C5CF1000AA90E /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E29D479A1C9C5CF1000AA90E /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			path = iWanna;
 			sourceTree = "<group>";
 		};
